@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tomcat-jenkins
+spec:
+  containers:
+    - name: jenkins
+      image: jenkins/jenkins:lts
+      ports:
+        - containerPort: 8081
+    - name: tomcat
+      image: tomcat:9.0
+      ports:
+        - containerPort: 8082
+
+#apiVersion - v1 - version used to create object
+#kind - what obeject we are creating
+#metadata - used for namming the pod
+#spec - components of pod like "containers(for containers er need image& name(optional), ports "
+# ports defined in the pod is accessecsable within the cluster only
