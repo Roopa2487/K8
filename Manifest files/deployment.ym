@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment # used to achieve high availaibility with zero downtime
+metadata:
+  name: jenkins-deployment
+  labels:
+    app: jenkins-label
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2 
+      maxUnavailable: 0 
+  selector:
+    matchLabels:
+      app: label-all
+  template:
+    metadata:
+      name: jenkins
+      labels:
+        app: label-all
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:lts
+
+# maxSurge - parallelly 2 pods wil be created and old running pods will be termination. usually used in updating the application
+# maxUnavailable - at the time of deployment how many pods can go unavailable and how many pods should be running during update. when we given more than 0 then that many pods will be terminated immedietially. 
