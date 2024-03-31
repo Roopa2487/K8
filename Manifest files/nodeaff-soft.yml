@@ -1,0 +1,19 @@
+metadata:
+  name: my-jenkins
+  labels:
+    app: jenkins
+spec:
+  containers:
+    - name: jenkins
+      image: jenkins/jenkins:2.303.1
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
+              - key: "name"
+                operator: NotIn
+                values:
+                  - worker
+                  - worker1
