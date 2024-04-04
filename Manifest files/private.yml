@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: private1
+spec:
+  containers:
+  - name: envars-test-container
+    image: shashidhar09/myjenkinsprivate:5
+  imagePullSecrets:
+    - name: regcred  
